@@ -51,11 +51,18 @@ void Game::update()
 	}
 
 	snake.update(delta);
+	
+	if (snake.getBounds().findIntersection(food.getBounds()))
+	{
+		snake.grow();
+		food.spawnFood();
+	}
 }
 
 void Game::render()
 {
 	window.clear();
 	snake.draw(window);
+	food.draw(window);
 	window.display();
 }

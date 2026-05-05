@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include "Snake.h"
+#include "Food.h"
 
 class Game
 {
@@ -20,5 +21,5 @@ private:
 	sf::Clock clock;
 
 	Snake snake;
-
+	Food food;
 };

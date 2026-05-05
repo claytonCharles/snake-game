@@ -12,6 +12,9 @@ public:
 	void move(float delta);
 	void updateDirection(sf::Vector2i direction);
 	void setScreenSpace(sf::Vector2f screen);
+	void grow();
+
+	sf::FloatRect getBounds();
 
 private:
 	std::vector<sf::RectangleShape> body;

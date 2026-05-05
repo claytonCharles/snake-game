@@ -48,6 +48,22 @@ void Snake::move(float delta)
 	}
 }
 
+void Snake::grow()
+{
+	int lastPart = body.size() - 1;
+	sf::Vector2f lastPosition = body[lastPart].getPosition();
+	
+	sf::RectangleShape segment(sf::Vector2f(snakeBodyBox, snakeBodyBox));
+	segment.setFillColor(sf::Color::Green);
+	segment.setPosition(lastPosition);
+	body.push_back(segment);
+}
+
+sf::FloatRect Snake::getBounds()
+{
+	return body[0].getGlobalBounds();
+}
+
 void Snake::setScreenSpace(sf::Vector2f screen)
 {
 	screenSpace = screen;

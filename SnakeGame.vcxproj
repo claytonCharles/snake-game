@@ -137,11 +137,13 @@ sfml-window-s.lib
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Food.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Food.h" />
     <ClInclude Include="include\Game.h" />
     <ClInclude Include="include\Snake.h" />
   </ItemGroup>
