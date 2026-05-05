@@ -51,8 +51,22 @@ void Game::update()
 	}
 
 	snake.update(delta);
-	
-	if (snake.getBounds().findIntersection(food.getBounds()))
+
+	sf::FloatRect snakeHeadCollision = snake.getHeadBounds();
+	std::vector<sf::FloatRect> snakeBodyCollision = snake.getBodyBounds();
+
+	if (snakeBodyCollision.size() > 1)
+	{
+		for (auto& part : snakeBodyCollision)
+		{
+			if (part.findIntersection(snakeHeadCollision))
+			{
+				window.close();
+			}
+		}
+	}
+
+	if (snakeHeadCollision.findIntersection(food.getBounds()))
 	{
 		snake.grow();
 		food.spawnFood();

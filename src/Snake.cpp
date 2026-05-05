@@ -4,21 +4,15 @@
 
 Snake::Snake() 
 {
-	sf::RectangleShape segment(sf::Vector2f(snakeBodyBox, snakeBodyBox));
-	segment.setFillColor(sf::Color::Green);
-
-	for (int i = 0; i <= 3; i++)
-	{
-		sf::Vector2f tt = sf::Vector2f(700 + i * snakeBodyBox, 0);
-		segment.setPosition(tt);
-		body.push_back(segment);
-	}
-
+	head.setFillColor(sf::Color::Blue);
+	head.setPosition(sf::Vector2f(700, 0));
 	direction = { -1, 0 };
 }
 
 void Snake::draw(sf::RenderWindow& window)
 {
+	window.draw(head);
+
 	for (auto& segment : body)
 	{
 		window.draw(segment);
@@ -37,31 +31,53 @@ void Snake::update(float delta)
 
 void Snake::move(float delta)
 {
-	sf::Vector2f currentPosition = body[0].getPosition();
+	sf::Vector2f currentPosition = head.getPosition();
 	Snake::moveSnakeHead(currentPosition, delta);
 
-	for (int i = 1; i <= body.size() - 1; i++)
-	{	
-		sf::Vector2f targetPosition = currentPosition;
-		currentPosition = body[i].getPosition();
-		body[i].setPosition(targetPosition);
+	if (body.size() > 0)
+	{
+		for (int i = 0; i <= body.size() - 1; i++)
+		{
+			sf::Vector2f targetPosition = currentPosition;
+			currentPosition = body[i].getPosition();
+			body[i].setPosition(targetPosition);
+		}
 	}
 }
 
 void Snake::grow()
 {
-	int lastPart = body.size() - 1;
-	sf::Vector2f lastPosition = body[lastPart].getPosition();
-	
-	sf::RectangleShape segment(sf::Vector2f(snakeBodyBox, snakeBodyBox));
+	sf::Vector2f lastPosition;
+	if (body.size() >= 1)
+	{
+		int lastPart = body.size() - 1;
+		lastPosition = body[lastPart].getPosition();
+	}
+	else
+	{
+		lastPosition = head.getPosition();
+	}
+
+	sf::RectangleShape segment(head.getSize());
 	segment.setFillColor(sf::Color::Green);
 	segment.setPosition(lastPosition);
 	body.push_back(segment);
 }
 
-sf::FloatRect Snake::getBounds()
+sf::FloatRect Snake::getHeadBounds()
 {
-	return body[0].getGlobalBounds();
+	return head.getGlobalBounds();
+}
+
+std::vector<sf::FloatRect> Snake::getBodyBounds()
+{
+	std::vector<sf::FloatRect> bounds;
+	for (auto& segment : body)
+	{
+		bounds.push_back(segment.getGlobalBounds());
+	}
+
+	return bounds;
 }
 
 void Snake::setScreenSpace(sf::Vector2f screen)
@@ -101,6 +117,5 @@ void Snake::moveSnakeHead(sf::Vector2f currentPosition, float delta)
 		currentPosition.y = 0;
 	}
 
-	body[0].setFillColor(sf::Color::Blue);
-	body[0].setPosition(currentPosition);
+	head.setPosition(currentPosition);
 }

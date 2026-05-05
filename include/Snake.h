@@ -14,9 +14,11 @@ public:
 	void setScreenSpace(sf::Vector2f screen);
 	void grow();
 
-	sf::FloatRect getBounds();
+	sf::FloatRect getHeadBounds();
+	std::vector<sf::FloatRect> getBodyBounds();
 
 private:
+	sf::RectangleShape head = sf::RectangleShape(sf::Vector2f(20.f, 20.f));
 	std::vector<sf::RectangleShape> body;
 
 	sf::Vector2f screenSpace;
