@@ -1,33 +1,37 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
 #include <vector>
+#include <SFML/Graphics.hpp>
 
-class Snake {
+class Snake : public sf::Drawable
+{
 public:
 	Snake();
 
-	void draw(sf::RenderWindow& window);
-	void update(float delta);
-	void move(float delta);
-	void updateDirection(sf::Vector2i direction);
-	void setScreenSpace(sf::Vector2f screen);
-	void grow();
+	void Ready(sf::Vector2f initPosition, sf::Vector2f initJail, sf::Vector2f endJail);
+	void Process(std::optional<sf::Event> event);
+	void PhysicsProcess(float delta);
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-	sf::FloatRect getHeadBounds();
-	std::vector<sf::FloatRect> getBodyBounds();
+	void Grow();
+
+	sf::FloatRect GetHeadBounds();
+	std::vector<sf::FloatRect> GetBodyBounds();
 
 private:
-	sf::RectangleShape head = sf::RectangleShape(sf::Vector2f(20.f, 20.f));
-	std::vector<sf::RectangleShape> body;
+	sf::RectangleShape m_head = sf::RectangleShape(sf::Vector2f(20.f, 20.f));
 
-	sf::Vector2f screenSpace;
+	std::vector<sf::RectangleShape> m_body;
 
-	float timer = 0.f;
-	float delay = 0.1f;
-	float snakeBodyBox = 20.f;
+	sf::Vector2f m_initJail;
+	sf::Vector2f m_endJail;
+	sf::Vector2i m_direction;
 
-	sf::Vector2i direction;
+	float m_timer = 0.f;
+	float m_delay = 0.1f;
+	float m_snakeBodyBox = 20.f;
 
+	void move(float delta);
 	void moveSnakeHead(sf::Vector2f currentPosition, float delta);
+	void updateDirection(sf::Vector2i direction);
 };

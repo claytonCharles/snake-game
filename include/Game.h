@@ -3,23 +3,29 @@
 #include <SFML/System/Clock.hpp>
 #include "Snake.h"
 #include "Food.h"
+#include "GameStateManager.h"
+
+struct Context
+{
+	std::unique_ptr<sf::RenderWindow> window;
+	std::unique_ptr<GameStateManager> states;
+
+	Context()
+	{
+		window = std::make_unique<sf::RenderWindow>();
+		states = std::make_unique<GameStateManager>();
+	}
+};
 
 class Game
 {
 public:
 	Game();
-	void run();
+	~Game();
 
+	void Run();
 
 private:
-	void processEvents();
-	void update();
-	void render();
-
-
-	sf::RenderWindow window;
-	sf::Clock clock;
-
-	Snake snake;
-	Food food;
+	std::shared_ptr<Context> m_context;
+	sf::Clock m_clock;
 };

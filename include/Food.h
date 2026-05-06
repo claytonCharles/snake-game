@@ -2,19 +2,20 @@
 
 #include <SFML/Graphics.hpp>
 
-class Food
+class Food : public sf::Drawable
 {
 public:
 	Food();
 
-	void update(float delta);
-	void draw(sf::RenderWindow& window);
-	void spawnFood();
-	
-	sf::FloatRect getBounds();
+	void Ready(sf::Vector2f initJail, sf::Vector2f endJail);
+	void SpawnFood();
+	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
+
+	sf::FloatRect GetBounds();
 
 private:
-	sf::RectangleShape shape = sf::RectangleShape(sf::Vector2f(20.f, 20.f));
-
-	float getRandomValue(int min, int max);
+	sf::Vector2f m_initJail;
+	sf::Vector2f m_endJail;
+	sf::RectangleShape m_shape = sf::RectangleShape(sf::Vector2f(20.f, 20.f));
+	sf::Vector2f getRandomValue(sf::Vector2f min, sf::Vector2f max, float gridShape);
 };

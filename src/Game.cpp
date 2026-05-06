@@ -1,82 +1,35 @@
 #include "Game.h"
+#include "MainMenu.h"
 #include <iostream>
+#include <optional>
 
 using namespace std;
 
-Game::Game() : window(sf::VideoMode({ 800, 600 }), "Snake Game") 
+Game::Game() : m_context(std::make_shared<Context>())
 {
-	snake.setScreenSpace(sf::Vector2f(800, 600));
+	m_context->window->create(sf::VideoMode({ 1280, 720 }), "Snake Game By Clayton Charlers", sf::Style::Close);
+	m_context->states->AddState(std::make_unique<MainMenu>(m_context));
 }
 
-void Game::run()
-{
-	while (window.isOpen())
-	{
-		processEvents();
-		update();
-		render();
-	}
-}
+Game::~Game() {}
 
-void Game::processEvents()
+void Game::Run()
 {
-	while (auto event = window.pollEvent())
+	while (m_context->window->isOpen())
 	{
-		if (event->is<sf::Event::Closed>())
+		while (auto event = m_context->window->pollEvent())
 		{
-			window.close();
-		}
-	}
-}
-
-void Game::update()
-{
-	float delta = clock.restart().asSeconds();
-
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W))
-	{
-		snake.updateDirection(sf::Vector2i(0, -1));
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
-	{
-		snake.updateDirection(sf::Vector2i(-1, 0));
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S))
-	{
-		snake.updateDirection(sf::Vector2i(0, 1));
-	}
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
-	{
-		snake.updateDirection(sf::Vector2i(1, 0));
-	}
-
-	snake.update(delta);
-
-	sf::FloatRect snakeHeadCollision = snake.getHeadBounds();
-	std::vector<sf::FloatRect> snakeBodyCollision = snake.getBodyBounds();
-
-	if (snakeBodyCollision.size() > 1)
-	{
-		for (auto& part : snakeBodyCollision)
-		{
-			if (part.findIntersection(snakeHeadCollision))
+			if (event->is<sf::Event::Closed>())
 			{
-				window.close();
+				m_context->window->close();
 			}
+
+			m_context->states->ProcessStateChange();
+			m_context->states->GetCurrentState()->Process(event);
 		}
-	}
 
-	if (snakeHeadCollision.findIntersection(food.getBounds()))
-	{
-		snake.grow();
-		food.spawnFood();
+		float delta = m_clock.restart().asSeconds();
+		m_context->states->GetCurrentState()->PhysicsProcess(delta);
+		m_context->states->GetCurrentState()->Draw();
 	}
-}
-
-void Game::render()
-{
-	window.clear();
-	snake.draw(window);
-	food.draw(window);
-	window.display();
 }

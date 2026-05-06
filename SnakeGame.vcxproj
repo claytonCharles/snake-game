@@ -113,7 +113,7 @@
       <AdditionalLibraryDirectories>C:\SFML-3.1.0_msvc64\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-s.lib;
 sfml-window-s.lib
-;sfml-system-s.lib;sfml-main.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+;sfml-system-s.lib;sfml-main.lib;opengl32.lib;winmm.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -133,18 +133,25 @@ sfml-window-s.lib
       <AdditionalLibraryDirectories>C:\SFML-3.1.0_msvc64\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-s.lib;
 sfml-window-s.lib
-;sfml-system-s.lib;sfml-main.lib;opengl32.lib;freetype.lib;winmm.lib;gdi32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+;sfml-system-s.lib;sfml-main.lib;opengl32.lib;winmm.lib;gdi32.lib;harfbuzz.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Food.cpp" />
     <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\GameStateManager.cpp" />
+    <ClCompile Include="src\GameWorld.cpp" />
     <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\MainMenu.cpp" />
     <ClCompile Include="src\Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Food.h" />
     <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\GameState.h" />
+    <ClInclude Include="include\GameStateManager.h" />
+    <ClInclude Include="include\GameWorld.h" />
+    <ClInclude Include="include\MainMenu.h" />
     <ClInclude Include="include\Snake.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -3,39 +3,47 @@
 #include <random>
 
 
-Food::Food()
+Food::Food() {};
+
+void Food::Ready(sf::Vector2f initJail, sf::Vector2f endJail)
 {
-	spawnFood();
+	m_initJail = initJail;
+	m_endJail = endJail;
+	SpawnFood();
 }
 
-void Food::update(float delta)
+void Food::SpawnFood()
 {
+	sf::Vector2f spawnPosition = getRandomValue(m_initJail, m_endJail, 20.f);
+	m_shape.setFillColor(sf::Color::Red);
+	m_shape.setPosition(spawnPosition);
 }
 
-void Food::spawnFood()
+void Food::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-	int spawnX = getRandomValue(0, 40);
-	int spawnY = getRandomValue(0, 30);
-
-	sf::Vector2f spawnPosition = sf::Vector2f(spawnX * 20.f, spawnY * 20.f);
-	shape.setFillColor(sf::Color::Red);
-	shape.setPosition(spawnPosition);
+	target.draw(m_shape);
 }
 
-void Food::draw(sf::RenderWindow& window)
+sf::FloatRect Food::GetBounds()
 {
-	window.draw(shape);
+	return m_shape.getGlobalBounds();
 }
 
-sf::FloatRect Food::getBounds()
-{
-	return shape.getGlobalBounds();
-}
-
-float Food::getRandomValue(int min, int max)
+sf::Vector2f Food::getRandomValue(sf::Vector2f min, sf::Vector2f max, float gridShape)
 {
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> distrib(min, max);
-	return (float)distrib(gen);
+
+	int minSpawnX = min.x / gridShape;
+	int minSpawnY = min.y / gridShape;
+	int maxSpawnX = max.x / gridShape;
+	int maxSpawnY = max.y / gridShape;
+
+	std::uniform_int_distribution<> distribX(minSpawnX, maxSpawnX);
+	std::uniform_int_distribution<> distribY(minSpawnY, maxSpawnY);
+
+	int spanwX = distribX(gen);
+	int spawnY = distribY(gen);
+
+	return sf::Vector2f(spanwX * gridShape, spawnY * gridShape);
 }
