@@ -75,7 +75,7 @@ void Snake::move(float delta)
 	}
 }
 
-void Snake::Grow()
+void Snake::Grow(std::optional<RectangleBuff> buff)
 {
 	sf::Vector2f lastPosition;
 	if (m_body.size() >= 1)

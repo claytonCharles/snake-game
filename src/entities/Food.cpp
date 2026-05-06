@@ -9,13 +9,23 @@ void Food::Ready(sf::Vector2f initJail, sf::Vector2f endJail)
 {
 	m_initJail = initJail;
 	m_endJail = endJail;
-	SpawnFood();
+	SpawnFood(std::nullopt);
 }
 
-void Food::SpawnFood()
+void Food::SpawnFood(std::optional<RectangleBuff> buff)
 {
+	m_buff = std::nullopt;
+	if (buff)
+	{
+		m_shape.setFillColor(buff->rectColor);
+		m_buff = buff.value();
+	}
+	else
+	{
+		m_shape.setFillColor(sf::Color::Green);
+	}
+
 	sf::Vector2f spawnPosition = getRandomValue(m_initJail, m_endJail, 20.f);
-	m_shape.setFillColor(sf::Color::Red);
 	m_shape.setPosition(spawnPosition);
 }
 

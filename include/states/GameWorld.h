@@ -5,6 +5,7 @@
 #include "core/GameState.h"
 #include "entities/Snake.h"
 #include "entities/Food.h"
+#include "entities/RectangleBuff.h"
 
 class GameWorld : public GameState
 {
@@ -28,6 +29,7 @@ private:
 
 	int m_score = 0;
 
+	RectangleBuff m_buff;
 	Snake m_snake;
 	Food m_food;
 };

@@ -2,6 +2,8 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "RectangleBuff.h"
+#include <optional>
 
 class Snake : public sf::Drawable
 {
@@ -13,7 +15,7 @@ public:
 	void PhysicsProcess(float delta);
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
-	void Grow();
+	void Grow(std::optional<RectangleBuff> buff);
 
 	sf::FloatRect GetHeadBounds();
 	std::vector<sf::FloatRect> GetBodyBounds();
@@ -26,8 +28,10 @@ private:
 	sf::Vector2f m_initJail;
 	sf::Vector2f m_endJail;
 	sf::Vector2i m_direction;
+	RectangleBuff m_buff;
 
 	float m_timer = 0.f;
+	float m_buffDuration = 5.f;
 	float m_delay = 0.1f;
 	float m_snakeBodyBox = 20.f;
 
