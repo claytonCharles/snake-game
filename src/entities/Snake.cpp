@@ -1,4 +1,4 @@
-#include "Snake.h"
+#include "entities/Snake.h"
 #include <typeinfo>
 #include <algorithm>
 

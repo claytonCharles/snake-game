@@ -1,8 +1,7 @@
 #pragma once
+
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
-#include "Snake.h"
-#include "Food.h"
 #include "GameStateManager.h"
 
 struct Context

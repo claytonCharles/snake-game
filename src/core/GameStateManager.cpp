@@ -1,4 +1,4 @@
-#include "GameStateManager.h"
+#include "core/GameStateManager.h"
 
 GameStateManager::GameStateManager(): m_add(false), m_replace(false), m_remove(false) {};
 

@@ -2,8 +2,8 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
-#include "Game.h"
-#include "GameState.h"
+#include "core/Game.h"
+#include "core/GameState.h"
 
 
 class MainMenu : public GameState

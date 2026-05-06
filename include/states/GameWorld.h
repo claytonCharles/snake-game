@@ -1,9 +1,9 @@
 #pragma once
 
-#include "Game.h"
-#include "GameState.h"
-#include "Snake.h"
-#include "Food.h"
+#include "core/Game.h"
+#include "core/GameState.h"
+#include "entities/Snake.h"
+#include "entities/Food.h"
 
 class GameWorld : public GameState
 {

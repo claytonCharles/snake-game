@@ -2,7 +2,7 @@
 
 #include <stack>
 #include <memory>
-#include <GameState.h>
+#include "GameState.h"
 
 class GameStateManager
 {

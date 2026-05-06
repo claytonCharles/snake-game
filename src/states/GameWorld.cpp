@@ -1,5 +1,5 @@
-#include "GameWorld.h"
-#include "MainMenu.h"
+#include "states/GameWorld.h"
+#include "states/MainMenu.h"
 
 GameWorld::GameWorld(std::shared_ptr<Context>& context): m_context(context) {};
 

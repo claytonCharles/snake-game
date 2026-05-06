@@ -1,5 +1,5 @@
-#include "Game.h"
-#include "MainMenu.h"
+#include "core/Game.h"
+#include "states/MainMenu.h"
 #include <iostream>
 #include <optional>
 
