@@ -29,20 +29,23 @@ void MainMenu::Process(std::optional<sf::Event> event)
 	
 	if (event && event->is<sf::Event::KeyPressed>())
 	{
-		switch (event->getIf<sf::Event::KeyPressed>()->code)
+		sf::Keyboard::Key keyCode = event->getIf<sf::Event::KeyPressed>()->code;
+		if (keyCode == sf::Keyboard::Key::W || keyCode == sf::Keyboard::Key::Up)
 		{
-		case sf::Keyboard::Key::W:
 			m_btnPlaySelected = true;
 			m_btnExitSelected = false;
-			break;
-		case sf::Keyboard::Key::S:
+		}
+
+		if (keyCode == sf::Keyboard::Key::S || keyCode == sf::Keyboard::Key::Down)
+		{
 			m_btnPlaySelected = false;
 			m_btnExitSelected = true;
-			break;
-		case sf::Keyboard::Key::Enter:
+		}
+
+		if (keyCode == sf::Keyboard::Key::Enter)
+		{
 			m_btnPlayPressed = m_btnPlaySelected;
 			m_btnExitPressed = m_btnExitSelected;
-			break;
 		}
 	}
 
