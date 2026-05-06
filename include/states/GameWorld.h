@@ -23,6 +23,11 @@ private:
 	std::shared_ptr<GameContext> m_context;
 	std::array<sf::RectangleShape, 4> m_walls;
 
+	sf::Font m_tFont = sf::Font("assets/fonts/SmoochSans-VariableFont_wght.ttf");
+	sf::Text m_gameScore = sf::Text(m_tFont, "Score: 0", 30);
+
+	int m_score = 0;
+
 	Snake m_snake;
 	Food m_food;
 };

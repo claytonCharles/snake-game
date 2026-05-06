@@ -8,6 +8,10 @@ GameWorld::~GameWorld() {};
 
 void GameWorld::Ready() 
 {
+	m_gameScore.setFillColor(sf::Color::White);
+	m_gameScore.setStyle(sf::Text::Style::Bold);
+	m_gameScore.setPosition(sf::Vector2f(50, 30));
+
 	m_walls[0].setSize(sf::Vector2f(1000, 20));
 	m_walls[0].setFillColor(sf::Color::White);
 	m_walls[0].setPosition(sf::Vector2f(140, 120));
@@ -67,6 +71,9 @@ void GameWorld::PhysicsProcess(float delta)
 	{
 		m_snake.Grow();
 		m_food.SpawnFood();
+
+		m_score += 1;
+		m_gameScore.setString(std::format("Score: {}", m_score));
 	}
 };
 
@@ -74,6 +81,7 @@ void GameWorld::Draw()
 {
 	m_context->window->clear();
 
+	m_context->window->draw(m_gameScore);
 	m_context->window->draw(m_snake);
 	m_context->window->draw(m_food);
 
