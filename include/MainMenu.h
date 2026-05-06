@@ -22,7 +22,7 @@ public:
 private:
 	std::shared_ptr<Context> m_context;
 
-	sf::Font m_tFont = sf::Font("src/assets/fonts/SmoochSans-VariableFont_wght.ttf");
+	sf::Font m_tFont = sf::Font("assets/fonts/SmoochSans-VariableFont_wght.ttf");
 	sf::Text m_gameTitle = sf::Text(m_tFont, "Retro Snake Game", 50);
 	sf::Text m_btnPlay = sf::Text(m_tFont, "Start Game", 40);
 	sf::Text m_btnExit = sf::Text(m_tFont, "Exit Game", 40);
