@@ -1,6 +1,7 @@
 #pragma once
 
 #include "core/Game.h"
+#include "core/GameContext.h"
 #include "core/GameState.h"
 #include "entities/Snake.h"
 #include "entities/Food.h"
@@ -8,7 +9,7 @@
 class GameWorld : public GameState
 {
 public:
-	GameWorld(std::shared_ptr<Context>& context);
+	GameWorld(std::shared_ptr<GameContext>& context);
 	~GameWorld();
 
 	void Ready() override;
@@ -19,7 +20,7 @@ public:
 	void Pause() override;
 
 private:
-	std::shared_ptr<Context> m_context;
+	std::shared_ptr<GameContext> m_context;
 	std::array<sf::RectangleShape, 4> m_walls;
 
 	Snake m_snake;

@@ -1,8 +1,9 @@
+#include "core/GameContext.h"
 #include "states/MainMenu.h"
 #include "states/GameWorld.h"
 #include <iostream>
 
-MainMenu::MainMenu(std::shared_ptr<Context>& context) : m_context(context) {};
+MainMenu::MainMenu(std::shared_ptr<GameContext>& context) : m_context(context) {};
 
 MainMenu::~MainMenu() {};
 

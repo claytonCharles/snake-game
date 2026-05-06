@@ -146,6 +146,7 @@ sfml-window-s.lib
     <ClCompile Include="src\entities\Snake.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\core\GameContext.h" />
     <ClInclude Include="include\entities\Food.h" />
     <ClInclude Include="include\core\Game.h" />
     <ClInclude Include="include\core\GameState.h" />

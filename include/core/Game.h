@@ -3,18 +3,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System/Clock.hpp>
 #include "GameStateManager.h"
-
-struct Context
-{
-	std::unique_ptr<sf::RenderWindow> window;
-	std::unique_ptr<GameStateManager> states;
-
-	Context()
-	{
-		window = std::make_unique<sf::RenderWindow>();
-		states = std::make_unique<GameStateManager>();
-	}
-};
+#include "GameContext.h"
 
 class Game
 {
@@ -25,6 +14,6 @@ public:
 	void Run();
 
 private:
-	std::shared_ptr<Context> m_context;
+	std::shared_ptr<GameContext> m_context;
 	sf::Clock m_clock;
 };
