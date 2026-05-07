@@ -18,6 +18,9 @@ void Game::Run()
 {
 	while (m_context->window->isOpen())
 	{
+		float delta = m_clock.restart().asSeconds();
+		m_context->states->ProcessStateChange();
+
 		while (auto event = m_context->window->pollEvent())
 		{
 			if (event->is<sf::Event::Closed>())
@@ -25,11 +28,9 @@ void Game::Run()
 				m_context->window->close();
 			}
 
-			m_context->states->ProcessStateChange();
 			m_context->states->GetCurrentState()->Process(event);
 		}
 
-		float delta = m_clock.restart().asSeconds();
 		m_context->states->GetCurrentState()->PhysicsProcess(delta);
 		m_context->states->GetCurrentState()->Draw();
 	}
