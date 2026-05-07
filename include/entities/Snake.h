@@ -28,7 +28,7 @@ private:
 	sf::Vector2f m_initJail;
 	sf::Vector2f m_endJail;
 	sf::Vector2i m_direction;
-	RectangleBuff m_buff;
+	std::optional<RectangleBuff> m_buff;
 
 	float m_timer = 0.f;
 	float m_buffDuration = 5.f;

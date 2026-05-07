@@ -39,6 +39,11 @@ sf::FloatRect Food::GetBounds()
 	return m_shape.getGlobalBounds();
 }
 
+std::optional<RectangleBuff> Food::GetFoodBuff()
+{
+	return m_buff;
+}
+
 sf::Vector2f Food::getRandomValue(sf::Vector2f min, sf::Vector2f max, float gridShape)
 {
 	std::random_device rd;

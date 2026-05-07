@@ -70,8 +70,9 @@ void GameWorld::PhysicsProcess(float delta)
 	if (snakeHeadCollision.findIntersection(m_food.GetBounds()))
 	{
 		RectangleBuff buff = m_buff.GetRandomBuff();
+		std::optional<RectangleBuff> foodBuff = m_food.GetFoodBuff();
 
-		m_snake.Grow(std::nullopt);
+		m_snake.Grow(foodBuff);
 		m_food.SpawnFood(buff);
 
 		m_score += 1;

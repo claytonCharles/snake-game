@@ -42,6 +42,20 @@ void Snake::PhysicsProcess(float delta)
 {
 
 	m_timer += delta;
+	if (m_buff && m_buff.value().randomBuff == EBuffs::Speed)
+	{
+		if (m_buffDuration > 0.f)
+		{
+			m_buffDuration -= delta;
+		}
+		else
+		{
+			m_buff = std::nullopt;
+			m_delay = 0.1f;
+			m_buffDuration = 0.f;
+		}
+	}
+
 	if (m_timer >= m_delay)
 	{
 		m_timer = 0.f;
@@ -78,6 +92,7 @@ void Snake::move(float delta)
 void Snake::Grow(std::optional<RectangleBuff> buff)
 {
 	sf::Vector2f lastPosition;
+	sf::Color segmentColor = sf::Color::Green;
 	if (m_body.size() >= 1)
 	{
 		int lastPart = m_body.size() - 1;
@@ -89,7 +104,37 @@ void Snake::Grow(std::optional<RectangleBuff> buff)
 	}
 
 	sf::RectangleShape segment(m_head.getSize());
-	segment.setFillColor(sf::Color::Green);
+
+
+	if (buff)
+	{
+		RectangleBuff current = buff.value();
+		segmentColor = current.rectColor;
+		if (current.randomBuff == EBuffs::Speed)
+		{
+			m_buff = buff;
+			m_delay = 0.050f;
+			m_buffDuration += 5.f;
+		}
+
+		if (current.randomBuff == EBuffs::UpSize)
+		{
+			sf::RectangleShape segmentAdd(m_head.getSize());
+			segmentAdd.setFillColor(sf::Color::Green);
+			segmentAdd.setPosition(lastPosition);
+			m_body.push_back(segment);
+
+			lastPosition = m_body[m_body.size() - 1].getPosition();
+		}
+
+		if (current.randomBuff == EBuffs::DownSize)
+		{
+			int bodySplit = m_body.size() > 3 ? 3 : 1;
+			m_body.resize(m_body.size() - bodySplit);
+		}
+	}
+
+	segment.setFillColor(segmentColor);
 	segment.setPosition(lastPosition);
 	m_body.push_back(segment);
 }
