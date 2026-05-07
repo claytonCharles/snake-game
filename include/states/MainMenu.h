@@ -2,6 +2,7 @@
 
 #include <memory>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "core/Game.h"
 #include "core/GameContext.h"
 #include "core/GameState.h"
@@ -14,6 +15,7 @@ public:
 	~MainMenu();
 
 	void Ready() override;
+	void Exit() override;
 	void Process(std::optional<sf::Event> event) override;
 	void PhysicsProcess(float delta) override;
 	void Draw() override;
@@ -27,6 +29,9 @@ private:
 	sf::Text m_gameTitle = sf::Text(m_tFont, "Retro Snake Game", 50);
 	sf::Text m_btnPlay = sf::Text(m_tFont, "Start Game", 40);
 	sf::Text m_btnExit = sf::Text(m_tFont, "Exit Game", 40);
+
+	sf::Music m_bgMusic = sf::Music("assets/audio/monume-retro-arcade-game-music-2-498031.mp3");
+	sf::Music m_btnChangeMusic = sf::Music("assets/audio/soundshelfstudio-ui-drag-drop-518781.mp3");
 
 	sf::Color m_btnSelectedColor = sf::Color::Yellow;
 	sf::Color m_btnUnselectedColor = sf::Color::White;

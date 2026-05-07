@@ -9,6 +9,10 @@ MainMenu::~MainMenu() {};
 
 void MainMenu::Ready()
 {
+	m_bgMusic.play();
+	m_bgMusic.setVolume(50);
+	m_bgMusic.setLooping(true);
+
 	float windowCenterX = m_context->window->getSize().x / 2.f;
 	float windowCenterY = m_context->window->getSize().y / 2.f;
 
@@ -24,6 +28,11 @@ void MainMenu::Ready()
 	m_btnExit.setStyle(sf::Text::Bold);
 }
 
+void MainMenu::Exit()
+{
+	m_bgMusic.stop();
+}
+
 void MainMenu::Process(std::optional<sf::Event> event)
 {
 	
@@ -34,12 +43,14 @@ void MainMenu::Process(std::optional<sf::Event> event)
 		{
 			m_btnPlaySelected = true;
 			m_btnExitSelected = false;
+			m_btnChangeMusic.play();
 		}
 
 		if (keyCode == sf::Keyboard::Key::S || keyCode == sf::Keyboard::Key::Down)
 		{
 			m_btnPlaySelected = false;
 			m_btnExitSelected = true;
+			m_btnChangeMusic.play();
 		}
 
 		if (keyCode == sf::Keyboard::Key::Enter)

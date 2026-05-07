@@ -133,7 +133,9 @@ sfml-window-s.lib
       <AdditionalLibraryDirectories>C:\SFML-3.1.0_msvc64\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-graphics-s.lib;
 sfml-window-s.lib
-;sfml-system-s.lib;sfml-main.lib;opengl32.lib;winmm.lib;gdi32.lib;harfbuzz.lib;freetype.lib;%(AdditionalDependencies)</AdditionalDependencies>
+;sfml-system-s.lib;sfml-audio-s.lib;sfml-main.lib;opengl32.lib;winmm.lib;gdi32.lib;harfbuzz.lib;freetype.lib;flac.lib;ogg.lib;vorbisenc.lib;
+vorbisfile.lib;
+vorbis.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>

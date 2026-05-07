@@ -11,6 +11,7 @@ public:
 	virtual ~GameState() {};
 
 	virtual void Ready() = 0;
+	virtual void Exit() = 0;
 	virtual void Process(std::optional<sf::Event> event) = 0;
 	virtual void PhysicsProcess(float delta) = 0;
 	virtual void Draw() = 0;

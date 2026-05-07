@@ -39,7 +39,7 @@ void GameStateManager::ProcessStateChange()
 
 		if (!m_statesStack.empty())
 		{
-			m_statesStack.top()->Pause();
+			m_statesStack.top()->Exit();
 		}
 
 		m_statesStack.push(std::move(m_newState));

@@ -8,6 +8,9 @@ GameWorld::~GameWorld() {};
 
 void GameWorld::Ready() 
 {
+	m_bgMusic.play();
+	m_bgMusic.setVolume(50);
+
 	m_gameScore.setFillColor(sf::Color::White);
 	m_gameScore.setStyle(sf::Text::Style::Bold);
 	m_gameScore.setPosition(sf::Vector2f(50, 30));
@@ -32,6 +35,11 @@ void GameWorld::Ready()
 	m_food.Ready(sf::Vector2f(160, 140), sf::Vector2f(1120, 640));
 };
 
+void GameWorld::Exit() 
+{
+	m_bgMusic.stop();
+}
+
 void GameWorld::Process(std::optional<sf::Event> event) 
 {
 	if (event && event->is<sf::Event::KeyPressed>())
@@ -54,17 +62,10 @@ void GameWorld::PhysicsProcess(float delta)
 	m_snake.PhysicsProcess(delta);
 
 	sf::FloatRect snakeHeadCollision = m_snake.GetHeadBounds();
-	std::vector<sf::FloatRect> snakeBodyCollision = m_snake.GetBodyBounds();
 
-	if (snakeBodyCollision.size() > 1)
+	if (m_snake.CheckSelfCollision())
 	{
-		for (auto& part : snakeBodyCollision)
-		{
-			if (part.findIntersection(snakeHeadCollision))
-			{
-				m_context->states->AddState(std::make_unique<MainMenu>(m_context), true);
-			}
-		}
+		m_context->states->AddState(std::make_unique<MainMenu>(m_context), true);
 	}
 
 	if (snakeHeadCollision.findIntersection(m_food.GetBounds()))

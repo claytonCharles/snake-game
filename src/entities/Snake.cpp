@@ -91,6 +91,7 @@ void Snake::move(float delta)
 
 void Snake::Grow(std::optional<RectangleBuff> buff)
 {
+	m_growMusic.play();
 	sf::Vector2f lastPosition;
 	sf::Color segmentColor = sf::Color::Green;
 	if (m_body.size() >= 1)
@@ -144,15 +145,20 @@ sf::FloatRect Snake::GetHeadBounds()
 	return m_head.getGlobalBounds();
 }
 
-std::vector<sf::FloatRect> Snake::GetBodyBounds()
+bool Snake::CheckSelfCollision()
 {
-	std::vector<sf::FloatRect> bounds;
+	if (m_body.size() <= 1) return false;
+
+	sf::FloatRect headCollision = m_head.getGlobalBounds();
 	for (auto& segment : m_body)
 	{
-		bounds.push_back(segment.getGlobalBounds());
+		if (segment.getGlobalBounds().findIntersection(headCollision))
+		{
+			return true;
+		}
 	}
 
-	return bounds;
+	return false;
 }
 
 void Snake::updateDirection(sf::Vector2i targetDirection)

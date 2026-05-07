@@ -2,6 +2,7 @@
 
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "RectangleBuff.h"
 #include <optional>
 
@@ -16,14 +17,17 @@ public:
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	void Grow(std::optional<RectangleBuff> buff);
+	bool CheckSelfCollision();
 
 	sf::FloatRect GetHeadBounds();
-	std::vector<sf::FloatRect> GetBodyBounds();
 
 private:
 	sf::RectangleShape m_head = sf::RectangleShape(sf::Vector2f(20.f, 20.f));
 
 	std::vector<sf::RectangleShape> m_body;
+
+	sf::Music m_growMusic = sf::Music("assets/audio/juniorsoundays-ui-sound-80-527880.mp3");
+	sf::Music m_deadMusic = sf::Music("assets/audio/juniorsoundays-ui-sound-06-527848.mp3");
 
 	sf::Vector2f m_initJail;
 	sf::Vector2f m_endJail;

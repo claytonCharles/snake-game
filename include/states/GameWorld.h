@@ -14,6 +14,7 @@ public:
 	~GameWorld();
 
 	void Ready() override;
+	void Exit() override;
 	void Process(std::optional<sf::Event> event) override;
 	void PhysicsProcess(float delta) override;
 	void Draw() override;
@@ -23,6 +24,8 @@ public:
 private:
 	std::shared_ptr<GameContext> m_context;
 	std::array<sf::RectangleShape, 4> m_walls;
+
+	sf::Music m_bgMusic = sf::Music("assets/audio/nickpanekaiassets-356-8-bit-chiptune-game-music-357518.mp3");
 
 	sf::Font m_tFont = sf::Font("assets/fonts/SmoochSans-VariableFont_wght.ttf");
 	sf::Text m_gameScore = sf::Text(m_tFont, "Score: 0", 30);
