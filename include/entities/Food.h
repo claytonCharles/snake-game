@@ -11,7 +11,7 @@ public:
 
 	void Ready(sf::Vector2f initJail, sf::Vector2f endJail);
 	void SpawnFood(std::optional<RectangleBuff> buff);
-	std::optional<RectangleBuff> GetFoodBuff();
+	std::optional<RectangleBuff> GetFoodBuff() const;
 	void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
 	sf::FloatRect GetBounds();

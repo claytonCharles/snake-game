@@ -24,6 +24,14 @@ public:
 private:
 	std::shared_ptr<GameContext> m_context;
 	std::array<sf::RectangleShape, 4> m_walls;
+	sf::RectangleShape m_background;
+
+	int m_maxMapWidht = 48;
+	int m_minMapWidht = 18;
+
+	int m_maxMapHeight = 28;
+	int m_minMapHeight = 12;
+
 
 	sf::Music m_bgMusic = sf::Music("assets/audio/nickpanekaiassets-356-8-bit-chiptune-game-music-357518.mp3");
 
@@ -35,4 +43,6 @@ private:
 	RectangleBuff m_buff;
 	Snake m_snake;
 	Food m_food;
+
+	void drawWalls(float jailWidth, float jailHeight, float jailX, float jailY, float tileSize);
 };

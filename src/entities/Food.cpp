@@ -39,7 +39,7 @@ sf::FloatRect Food::GetBounds()
 	return m_shape.getGlobalBounds();
 }
 
-std::optional<RectangleBuff> Food::GetFoodBuff()
+std::optional<RectangleBuff> Food::GetFoodBuff() const
 {
 	return m_buff;
 }
